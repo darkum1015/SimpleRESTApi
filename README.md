@@ -8,3 +8,7 @@ https://docs.mongodb.com/ecosystem/platforms/modulus/#modulus-account-setup
 NOTE: First Login -> Create DB -> Create User for DB ( modulus mongo user create "TestUser" )
 
 Run $ npm install in the root directory to get and install all project dependencies locally.
+
+$npm init - set main property to server.js 
+
+Once all dependencies are setup, run $ node server.js to start server.
