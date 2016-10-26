@@ -250,8 +250,15 @@ apiRoutes.delete('/bears/:bear_id',function(req, res) {
         res.json({message: 'Successfully deleted'});
     });
 });*/
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 // apply the routes to our application with the prefix /api
 app.use('/api', apiRoutes);
+
 
 
 // =======================
