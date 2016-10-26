@@ -137,7 +137,10 @@ apiRoutes.get('/users', function(req, res) {
 
 apiRoutes.route('/bears').post(function(req,res){
     var bear = new Bear();      // create a new instance of the Bear model
-    bear.name = req.body.name;  // set the bears name (comes from the request)
+    bear.species = req.body.species;
+    bear.name = req.body.name;
+
+    // set the bears name (comes from the request)
 
     // save the bear and check for errors
     bear.save(function(err) {
