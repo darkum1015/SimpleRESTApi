@@ -155,7 +155,7 @@ apiRoutes.route('/bears').post(function(req,res){
         if (err)
             res.send(err);
 
-        res.json(bears);
+        res.json({ success: true, rows : bears});
     });
 });
 
@@ -194,7 +194,8 @@ apiRoutes.route('/bears/:bear_id').get(function(req,res){
         if (err)
             res.send(err);
 
-        bear.name = req.body.name;  // update the bears info
+        bear.name = req.body.name;
+        bear.species = req.body.species;
 
         // save the bear
         bear.save(function(err) {
