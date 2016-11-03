@@ -92,6 +92,12 @@ apiRoutes.post('/authenticate', function(req, res) {
     });
 });
 
+
+apiRoutes.options('*',function (req, res, next) {
+    res.status(200).send();
+
+});
+
 // route middleware to verify a token
 apiRoutes.use(function(req, res, next) {
 
@@ -251,12 +257,14 @@ apiRoutes.delete('/bears/:bear_id',function(req, res) {
         res.json({message: 'Successfully deleted'});
     });
 });*/
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
     next();
 });
+
 
 // apply the routes to our application with the prefix /api
 app.use('/api', apiRoutes);
