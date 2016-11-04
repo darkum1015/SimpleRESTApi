@@ -92,6 +92,12 @@ apiRoutes.post('/authenticate', function(req, res) {
     });
 });
 
+
+apiRoutes.options('*',function (req, res, next) {
+    res.status(200).send();
+
+});
+
 // route middleware to verify a token
 apiRoutes.use(function(req, res, next) {
 
@@ -155,7 +161,7 @@ apiRoutes.route('/bears').post(function(req,res){
         if (err)
             res.send(err);
 
-        res.json(bears);
+        res.json({ success: true, rows : bears});
     });
 });
 
@@ -194,7 +200,8 @@ apiRoutes.route('/bears/:bear_id').get(function(req,res){
         if (err)
             res.send(err);
 
-        bear.name = req.body.name;  // update the bears info
+        bear.name = req.body.name;
+        bear.species = req.body.species;
 
         // save the bear
         bear.save(function(err) {
@@ -250,11 +257,14 @@ apiRoutes.delete('/bears/:bear_id',function(req, res) {
         res.json({message: 'Successfully deleted'});
     });
 });*/
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
     next();
 });
+
 
 // apply the routes to our application with the prefix /api
 app.use('/api', apiRoutes);
